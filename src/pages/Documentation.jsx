@@ -99,13 +99,14 @@ const Documentation = () => {
               <p className="mx-[2%] space-x-2 ">
                 <span className="bg-green-200 px-2 py-1">GET</span>
                 <span className="mx-[2%]">
-                  http://localhost:8080/api/v1/route/driving/route
+                  http://mapapi.gebeta.app/api/v1/route/driving/route
+                  
                 </span>
               </p>
             </div>
             {/* request sample here */}
             <RequestSample
-              curl='curl "https://graphhopper.com/api/1/route?point=51.131,12.414&point=48.224,3.867&profile=car&locale=de&calc_points=false&key=api_key"'
+              curl='curl "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + l1 + "&lo1=" + lo1 + "&la2=" + la2 + "&lo2=" + lo2'
               js={direction}
             />
             <ResponseSample />
@@ -124,13 +125,14 @@ const Documentation = () => {
               <p className="mx-[2%] space-x-2 ">
                 <span className="bg-green-200 px-2 py-1">GET</span>
                 <span className="mx-[2%]">
-                  http://localhost:8080/api/v1/route/driving/route
+                  http://mapapi.gebeta.app/api/v1/route/driving/route
                 </span>
               </p>
             </div>
             {/* request sample here */}
             <RequestSample
-              curl='curl "https://graphhopper.com/api/1/route?point=51.131,12.414&point=48.224,3.867&profile=car&locale=de&calc_points=false&key=api_key"'
+                curl='curl "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + l1 + "&lo1=" + lo1 + "&la2=" + la2 + "&lo2=" + lo2'
+           
               js={direction}
             />
             <ResponseSample />
@@ -228,13 +230,13 @@ const Documentation = () => {
               <p className="mx-[2%] space-x-2 ">
                 <span className="bg-green-200 px-2 py-1">GET</span>
                 <span className="mx-[2%]">
-                  http://localhost:8080/api/v1/route/driving/matrix
+                  http://mapapi.gebeta.app/api/v1/route/driving/matrix
                 </span>
               </p>
             </div>
             {/* request sample here */}
             <RequestSample
-              curl='curl "http://localhost:8080/api/v1/route/driving/matrix/?start=" + startpoint + "&end=" +  endpoints'
+             curl='curl "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + l1 + "&lo1=" + lo1 + "&la2=" + la2 + "&lo2=" + lo2'
               js={direction}
             />
             <ResponseSample />
