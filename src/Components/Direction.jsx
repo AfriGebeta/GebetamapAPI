@@ -109,7 +109,7 @@ function Direction() {
 
   
   return (
-   
+   <div className="leaflet-container">
       <MapContainer center={[default_latitude, default_longitude]} zoom={18}>
           <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -117,6 +117,8 @@ function Direction() {
         />
         <AddMarkerToClick/>
     </MapContainer>
+   </div>
+      
 
         
 
