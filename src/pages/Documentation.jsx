@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import RequestSample from "../Components/RequestSample";
 import ResponseSample from "../Components/ResponseSample";
 import { direction, responseSampleForDirection200, responseSampleForDirection400, responseSampleForDirection500 } from "../data/responsecode";
+import Direction from "../Components/Direction";
+
 const openstreetmap = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 const Documentation = () => {
   return (
@@ -63,8 +65,8 @@ const Documentation = () => {
           </ol>
 
           
-
-
+          
+         
           <p className="mt-[5%] font-bold text-3xl mb-[1%]">
             GET Route Endpoint
           </p>
@@ -91,6 +93,9 @@ const Documentation = () => {
             />
             <ResponseSample responseCodes200={ responseSampleForDirection200} responseCodes400={responseSampleForDirection400 } responseCodes500={responseSampleForDirection500 }      />
           </div>
+          <div className=' w-[100%] h-[60%]' >
+             <Direction/>
+        </div>
           {/*Route Optimization problem*/}
           <p className="mt-[5%] font-bold text-3xl mb-[5%]">
             Route Optimization API
