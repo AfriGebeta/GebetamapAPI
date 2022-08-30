@@ -1,12 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef} from "react";
 
 import RequestSample from "../Components/RequestSample";
 import ResponseSample from "../Components/ResponseSample";
 import { direction, responseSampleForDirection200, responseSampleForDirection400, responseSampleForDirection500 } from "../data/responsecode";
 import Direction from "../Components/Direction";
-
+import Matrix from "../Components/Matrix";
+import OneToMany  from "../Components/OneToMany";
+import ISODistance from "../Components/IsoDistance";
+import Tss from "../Components/Tss";
 const openstreetmap = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+
 const Documentation = () => {
+  //for the matrix
+  const [matrixStart, setMatrixStart] = useState(false)
+  const [matrixCalculate , setMatrixCalculate] = useState(false)
+  
+
+  //for the routeOptimization
+  const [routeOptimizationStart, setRouteOptimizationStart] = useState(false)
+      const [routeOptimizationCalculate , setRouteOptimizationCalculate] = useState(false)
+       
+      
+  let handleRouteOptimizationStart = (event) => {
+    event.preventDefault();
+   setRouteOptimizationStart(!routeOptimizationStart) 
+}
+  
+
+  let handleRouteOptimizationCalculate = (event) => {
+   event.preventDefault();
+    setRouteOptimizationCalculate(!routeOptimizationCalculate)
+  }
+  let handleMatrixStart = () => {
+             setMatrixStart(!matrixStart)
+           }
+  let handleMatrixCalculate = ()=> {
+  setMatrixCalculate(!matrixCalculate)
+}
   return (
     <>
       <div class="flex w-full">
@@ -95,7 +125,9 @@ const Documentation = () => {
           </div>
           <div className=' w-[90%] h-[500px] bg-red-200' >
              <Direction/>
-        </div>
+          </div>
+          
+          
           {/*Route Optimization problem*/}
           <p className="mt-[5%] font-bold text-3xl mb-[5%]">
             Route Optimization API
@@ -123,7 +155,18 @@ const Documentation = () => {
             <ResponseSample responseCodes200={ responseSampleForDirection200} responseCodes400={responseSampleForDirection400 } responseCodes500={responseSampleForDirection500 }      />
           </div>
           {/*  */}
-
+           <button style={{ background : routeOptimizationStart ? "green" : "red"}} onClick={(e) => { handleRouteOptimizationStart(e); }}>nodes</button>
+          <button style={{ background: routeOptimizationCalculate ? "green" : "red" }} onClick={(e) => {
+            handleRouteOptimizationCalculate(e);
+         
+          setTimeout(function(){
+             setRouteOptimizationCalculate(false)
+            setRouteOptimizationStart(false)
+              }, 300);
+          }}>Calculate</button>
+        <div className=' w-[90%] h-[500px] mb-[200px] ' >
+             <Tss routeOptimizationStart={routeOptimizationStart} routeOptimizationCalculate = {routeOptimizationCalculate} />
+        </div>
           <p className="mt-[5%] font-bold text-3xl mb-[5%]">
             GET Route Endpoint
           </p>
@@ -207,8 +250,24 @@ The most simple example is a people trying to decide which bus restoursant is cl
              curl='curl "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + l1 + "&lo1=" + lo1 + "&la2=" + la2 + "&lo2=" + lo2'
               js={direction}
             />
-            <ResponseSample responseCodes200={ responseSampleForDirection200} responseCodes400={responseSampleForDirection400 } responseCodes500={responseSampleForDirection500 }      />
+            <ResponseSample responseCodes200={responseSampleForDirection200} responseCodes400={responseSampleForDirection400} responseCodes500={responseSampleForDirection500} />
+            
+   
           </div>
+             <button style={{ background :matrixStart ? "green" : "red"}} onClick={() => { handleMatrixStart() }}>nodes</button>
+          <button style={{ background: matrixCalculate ? "green" : "red" }} onClick={() => {
+            handleMatrixCalculate()
+            
+              // 1 second delay
+              setTimeout(function(){
+                  setMatrixStart(false)
+                setMatrixCalculate(false)
+              }, 3000);
+          
+          }}>Calculate</button>
+          <div className=' w-[90%] h-[500px] mb-[200px] ' >
+             <Matrix matrixStart={matrixStart} matrixCalculate = {matrixCalculate} />
+        </div>
         </main>
       </div>
     </>
