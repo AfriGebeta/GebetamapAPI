@@ -71,19 +71,35 @@ const GreenIcon = L.icon({
       let en = gmarker[i].lat +"/"+ gmarker[i].lng;
       startpoint.push(en)
     }
-    const url = "https://mapapi.gebeta.app/api/v1/route/driving/matrix/?start=" + startpoint + "&apiKey=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY"
-      try {
+    //['9.02179482529835/38.79895733316493', '9.021286211799913/38.80321858887773', '9.022515359860698/38.80174807997937']
+
+
+    const url = "http://mapapi.gebeta.app/api/v1/route/driving/matrix/?start=" + startpoint + "&apiKey=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY"
+   
+    try {
         async function getData() {
             const getResonse = await fetch(url)
             const data = await getResonse.json()
             if (getResonse.status != 400) {
-              setPos(data.directions);
-              console.log(data)
+               let array = []
+             for (let i = 0; i < data.response.length; i++) {
+                 array.push(data.response[i].data.direction)
+        }
+      
+        try {
+          setPos(array);
+        }catch(err){}
+              
+              return data
+              
+             
             } else {
               console.log(data)
+              return []
             }
-         }
-        getData()
+      }
+      getData()
+      
       } catch (err) { 
       }      
   }
@@ -112,8 +128,15 @@ function getRandomColor() {
       )}
 
       
-       {pos.map(position => 
-         <Polyline positions={position.direction} color={ getRandomColor()} />
+      {pos.map(position => {
+        try {
+          return <Polyline positions={position} color={ getRandomColor()} />
+        } catch (err) {
+          
+        }
+      }
+         
+         
       )}
        
       
@@ -125,11 +148,17 @@ function getRandomColor() {
 
 
 function Matrix(props) {
+
   const [start, setStart] = useState(false);
   const [stop, setStop] = useState(false);
   const [calculate, setCalculate] = useState(false);
+
+ 
   return (
+
+
           <div className='leaflet-container relative'>
+
             <MapContainer center={[default_latitude, default_longitude]} zoom={18}>
                 <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

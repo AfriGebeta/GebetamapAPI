@@ -66,6 +66,29 @@ export const tssreponse200 =
                 <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,
                 <span className='pl-[3%]'>]</span>,
                 <span className=''>&#125;</span>
+    ]
+
+export const matrixResponse200 = [
+    <span>response: [ &#123;</span>,
+                <span>stop: [9.021286211799913,38.80321858887773],</span>,
+                <span>start: [9.02179482529835,38.79895733316493],</span>,
+                <span>data : &#123;</span>,
+                <span className='pl-[3%]'>totalDistance:471,</span>,
+                <span className='pl-[3%]'>code:ok,</span> ,
+                <span className='pl-[3%]'>"direction":[</span>  ,  
+                <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,
+                <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,
+                <span className='pl-[3%]'>]</span>,
+                <span className=''>&#125;,</span>,
+                <span className=''>]</span>
 ]
+    
+
+
+
+
+
+
+
 
 

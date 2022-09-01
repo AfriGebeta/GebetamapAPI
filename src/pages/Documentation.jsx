@@ -2,7 +2,7 @@ import React, { useEffect, useState , useRef} from "react";
 
 import RequestSample from "../Components/RequestSample";
 import ResponseSample from "../Components/ResponseSample";
-import { direction, responseSampleForDirection200, responseSampleForDirection400, responseSampleForDirection500 , tssreponse200 } from "../data/responsecode";
+import { direction, responseSampleForDirection200, responseSampleForDirection400, responseSampleForDirection500 , tssreponse200 , matrixResponse200 } from "../data/responsecode";
 import Direction from "../Components/Direction";
 import Matrix from "../Components/Matrix";
 import OneToMany  from "../Components/OneToMany";
@@ -252,7 +252,7 @@ The most simple example is a people trying to decide which bus restoursant is cl
              curl='curl http://mapapi.gebeta.app/api/v1/route/driving/tss/?start=[[19.23,38.232],[19.23,38.232]]&apiKey=key'
               js={direction}
             />
-            <ResponseSample responseCodes200={responseSampleForDirection200} responseCodes400={responseSampleForDirection400} responseCodes500={responseSampleForDirection500} />
+            <ResponseSample responseCodes200={matrixResponse200} responseCodes400={responseSampleForDirection400} responseCodes500={responseSampleForDirection500} />
             
    
           </div>
