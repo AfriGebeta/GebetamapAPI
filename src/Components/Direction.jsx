@@ -44,7 +44,7 @@ const GreenIcon = L.icon({
   });
 
   const map = useMapEvents({
-    click(e) {
+   async click(e)  {
       const newMarker = e.latlng
       if (l1 == "") {  
           setL1(newMarker.lat);
@@ -57,18 +57,23 @@ const GreenIcon = L.icon({
       {
 
         var startTime = performance.now()
-        const url = "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + l1 + "&lo1=" + lo1 + "&la2=" + newMarker.lat + "&lo2=" + newMarker.lng
-        
-        fetch(url)
-          .then(response =>  response.json() )
-          .then(data => {
-            console.log("Printing the data here")
-            console.log(data)
-            setPos(data.direction);
-          });
-        let _rmarker = [];
+        const url = "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + l1 + "&lo1=" + lo1 + "&la2=" + newMarker.lat + "&lo2=" + newMarker.lng + "&apiKey=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY" 
+        try {
+          let _rmarker = [];
         _rmarker.push(e.latlng);
         redMarker(_rmarker);
+          const getResonse = await fetch(url)
+          const data = await getResonse.json()
+          if (getResonse.status != 400) {
+            setPos(data.direction);
+          } else {
+            console.log(data)
+          }
+        } catch (err) {
+          
+        }
+      
+        
         
         var endTime = performance.now()
 
@@ -78,9 +83,7 @@ const GreenIcon = L.icon({
       }     
     },
   })
-  const blabal = [[9.0209339, 38.804987], [9.0209339, 38.804987], [9.0206708, 38.8044643], [9.0205022, 38.8041264], [9.0204362, 38.8039818], 
-[9.0204051, 38.8039], [9.0203838, 38.8038192], [9.0203733, 38.8037143], [9.0203712, 38.803634], [9.0203797, 38.803483], [9.0203978, 38.803373], [9.0204357, 38.8032406], [9.0204653, 38.8031732], [9.0206561, 38.8028339], [9.0207779, 38.8026341], [9.0208638, 38.8024919], [9.0210909, 38.8021008], [9.0210909, 38.8021008]]
-    
+
         return (
     
       <div>

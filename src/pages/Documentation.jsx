@@ -2,7 +2,7 @@ import React, { useEffect, useState , useRef} from "react";
 
 import RequestSample from "../Components/RequestSample";
 import ResponseSample from "../Components/ResponseSample";
-import { direction, responseSampleForDirection200, responseSampleForDirection400, responseSampleForDirection500 } from "../data/responsecode";
+import { direction, responseSampleForDirection200, responseSampleForDirection400, responseSampleForDirection500 , tssreponse200 } from "../data/responsecode";
 import Direction from "../Components/Direction";
 import Matrix from "../Components/Matrix";
 import OneToMany  from "../Components/OneToMany";
@@ -118,7 +118,7 @@ const Documentation = () => {
             </div>
             {/* request sample here */}
             <RequestSample
-              curl='curl "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + l1 + "&lo1=" + lo1 + "&la2=" + la2 + "&lo2=" + lo2'
+              curl='curl "https://mapapi.gebeta.app/api/v1/route/driving/direction/?point=" + l1 + "&point=" + lo1 + "&point=" + la2 + "&point=" + lo2 + "&apiKey=" + apiKey'
               js={direction}
             />
             <ResponseSample responseCodes200={ responseSampleForDirection200} responseCodes400={responseSampleForDirection400 } responseCodes500={responseSampleForDirection500 }      />
@@ -148,11 +148,12 @@ const Documentation = () => {
             </div>
             {/* request sample here */}
             <RequestSample
-                curl='curl "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + l1 + "&lo1=" + lo1 + "&la2=" + la2 + "&lo2=" + lo2'
+                curl='curl http://mapapi.gebeta.app/api/v1/route/driving/tss/?start=[[19.23,38.232],[19.23,38.232]]&apiKey=key'
+              
            
               js={direction}
             />
-            <ResponseSample responseCodes200={ responseSampleForDirection200} responseCodes400={responseSampleForDirection400 } responseCodes500={responseSampleForDirection500 }      />
+            <ResponseSample responseCodes200={ tssreponse200} responseCodes400={responseSampleForDirection400 } responseCodes500={responseSampleForDirection500 }      />
           </div>
           {/*  */}
            <button style={{ background : routeOptimizationStart ? "green" : "red"}} onClick={(e) => { handleRouteOptimizationStart(e); }}>nodes</button>
@@ -247,7 +248,8 @@ The most simple example is a people trying to decide which bus restoursant is cl
             </div>
             {/* request sample here */}
             <RequestSample
-             curl='curl "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + l1 + "&lo1=" + lo1 + "&la2=" + la2 + "&lo2=" + lo2'
+              
+             curl='curl http://mapapi.gebeta.app/api/v1/route/driving/tss/?start=[[19.23,38.232],[19.23,38.232]]&apiKey=key'
               js={direction}
             />
             <ResponseSample responseCodes200={responseSampleForDirection200} responseCodes400={responseSampleForDirection400} responseCodes500={responseSampleForDirection500} />

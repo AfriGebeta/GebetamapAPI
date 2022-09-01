@@ -66,27 +66,26 @@ const GreenIcon = L.icon({
   })
 
   if (props.calculate) {
-
-
     let startpoint = []
     for (let i = 0; i < gmarker.length; i++){
       let en = gmarker[i].lat +"/"+ gmarker[i].lng;
       startpoint.push(en)
     }
-    
-
-
-    
-    
-    const url = "https://mapapi.gebeta.app/api/v1/route/driving/matrix/?start=" + startpoint 
-        fetch(url)
-          .then(response =>  response.json() )
-          .then(data => {
-            setPos(data.directions)
-         
-          });
-      
-      
+    const url = "https://mapapi.gebeta.app/api/v1/route/driving/matrix/?start=" + startpoint + "&apiKey=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY"
+      try {
+        async function getData() {
+            const getResonse = await fetch(url)
+            const data = await getResonse.json()
+            if (getResonse.status != 400) {
+              setPos(data.directions);
+              console.log(data)
+            } else {
+              console.log(data)
+            }
+         }
+        getData()
+      } catch (err) { 
+      }      
   }
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -126,17 +125,11 @@ function getRandomColor() {
 
 
 function Matrix(props) {
-
   const [start, setStart] = useState(false);
   const [stop, setStop] = useState(false);
   const [calculate, setCalculate] = useState(false);
-
- 
   return (
-
-
           <div className='leaflet-container relative'>
-
             <MapContainer center={[default_latitude, default_longitude]} zoom={18}>
                 <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

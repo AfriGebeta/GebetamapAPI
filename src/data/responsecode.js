@@ -54,3 +54,18 @@ export const responseSampleForDirection500 = [
 ]
 
 
+/////////////////////
+export const tssreponse200 =
+  [
+    <span>&#123;</span>,
+
+                <span className='pl-[3%]'>totalDistance:471,</span>,
+           
+                <span className='pl-[3%]'>"direction":[</span>  ,  
+                <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,
+                <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,
+                <span className='pl-[3%]'>]</span>,
+                <span className=''>&#125;</span>
+]
+
+
