@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, Polyline , useMapEvents , Marker , Popup , Pol
 import { useState } from 'react';
 import red from './red.png';
 import L from 'leaflet';
-
+import { matrix } from '../data/index';
 import green from './green.png';
 const default_latitude = 9.02151;
 const default_longitude = 38.80115;
@@ -71,33 +71,21 @@ const GreenIcon = L.icon({
       let en = gmarker[i].lat +"/"+ gmarker[i].lng;
       startpoint.push(en)
     }
-    //['9.02179482529835/38.79895733316493', '9.021286211799913/38.80321858887773', '9.022515359860698/38.80174807997937']
-
-
-    const url = "http://mapapi.gebeta.app/api/v1/route/driving/matrix/?start=" + startpoint + "&apiKey=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY"
-   
+  
+ 
     try {
-        async function getData() {
-            const getResonse = await fetch(url)
-            const data = await getResonse.json()
-            if (getResonse.status != 400) {
-               let array = []
-             for (let i = 0; i < data.response.length; i++) {
+      async function getData() {
+          const data = await matrix( startpoint , "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY")
+          let array = []
+          for (let i = 0; i < data.response.length; i++) {
                  array.push(data.response[i].data.direction)
-        }
-      
-        try {
-          setPos(array);
-        }catch(err){}
-              
+          }
+          try {
+            setPos(array);
+          }catch(err){}    
               return data
-              
-             
-            } else {
-              console.log(data)
-              return []
-            }
-      }
+          } 
+      
       getData()
       
       } catch (err) { 

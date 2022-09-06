@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Polyline , useMapEvents , Marker , Popup , Pol
 import { useState } from 'react';
 import red from './red.png';
 import L from 'leaflet';
+import {tss} from '../data/index'
 const default_latitude = 9.02151;
 const default_longitude = 38.80115;
 
@@ -72,17 +73,12 @@ const GreenIcon = L.icon({
       let en = gmarker[i].lat +"/"+ gmarker[i].lng;
       startpoint.push(en)
     }
-       const url = "https://mapapi.gebeta.app/api/v1/route/driving/tss/?start=" + startpoint + "&apiKey=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY"
+      
       try {
         async function getData() {
-            const getResonse = await fetch(url)
-          const data = await getResonse.json()
-          console.log(data)
-            if (getResonse.status != 400) {
-              setPos(data.direction);
-            } else {
-              console.log(data)
-            }
+          const ts = await tss(startpoint , "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY")
+      
+          setPos(ts.direction);
          }
         getData()
       } catch (err) {

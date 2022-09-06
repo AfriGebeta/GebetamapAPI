@@ -2,6 +2,7 @@
 
 import { MapContainer, TileLayer, Polyline , useMapEvents , Marker , Popup , Polygon , FeatureGroup , EditControl} from 'react-leaflet';
 import { useState } from 'react';
+import { direction } from '../data/index.js';
 import red from './red.png';
 import green from './green.png';
 import L from 'leaflet';
@@ -55,29 +56,15 @@ const GreenIcon = L.icon({
       }
       else
       {
-
-        var startTime = performance.now()
-        const url = "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + l1 + "&lo1=" + lo1 + "&la2=" + newMarker.lat + "&lo2=" + newMarker.lng + "&apiKey=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY" 
         try {
-          let _rmarker = [];
-        _rmarker.push(e.latlng);
-        redMarker(_rmarker);
-          const getResonse = await fetch(url)
-          const data = await getResonse.json()
-          if (getResonse.status != 400) {
+            let data = await direction({lat : l1 , lon : lo1} , newMarker , "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY")       
+            let _rmarker = [];
+            _rmarker.push(e.latlng);
+            redMarker(_rmarker);
             setPos(data.direction);
-          } else {
-            console.log(data)
-          }
         } catch (err) {
-          
-        }
-      
-        
-        
-        var endTime = performance.now()
-
-        console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)
+          console.log(err)
+        } 
         setL1("");
         setLO1("");
       }     
