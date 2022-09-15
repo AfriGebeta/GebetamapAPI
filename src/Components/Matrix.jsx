@@ -74,12 +74,12 @@ const GreenIcon = L.icon({
           const data = await matrix( gmarker , "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY")
           let array = []
           for (let i = 0; i < data.response.length; i++) {
-          
+
           for (let j = 0; j < data.response[i].length; j++){
-            if (i != j) {
+         
                     array.push(data.response[i][j].data.direction)
                   }
-                }
+              
           }
           try {
             setPos(array);
