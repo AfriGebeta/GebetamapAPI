@@ -13,7 +13,7 @@ export const responseSampleForDirection200 = [
     <span>&#123;</span>,
 
                 <span className='pl-[3%]'>totalDistance:471,</span>,
-                <span className='pl-[3%]'>code:ok,</span> ,
+                <span className='pl-[3%]'>msg:ok,</span> ,
                 <span className='pl-[3%]'>"direction":[</span>  ,  
                 <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,
                 <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,
@@ -60,7 +60,7 @@ export const tssreponse200 =
     <span>&#123;</span>,
 
                 <span className='pl-[3%]'>totalDistance:471,</span>,
-           
+              <span className='pl-[3%]'>msg:ok,</span> ,
                 <span className='pl-[3%]'>"direction":[</span>  ,  
                 <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,
                 <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,
@@ -74,7 +74,7 @@ export const matrixResponse200 = [
                 <span>start: [9.02179482529835,38.79895733316493],</span>,
                 <span>data : &#123;</span>,
                 <span className='pl-[3%]'>totalDistance:471,</span>,
-                <span className='pl-[3%]'>code:ok,</span> ,
+                <span className='pl-[3%]'>msg:ok,</span> ,
                 <span className='pl-[3%]'>"direction":[</span>  ,  
                 <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,
                 <span className='pl-[6%]'>&#123; 9.2132 , 36.1232 &#125;,</span>,

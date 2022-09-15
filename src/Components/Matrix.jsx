@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, Polyline , useMapEvents , Marker , Popup , Pol
 import { useState } from 'react';
 import red from './red.png';
 import L from 'leaflet';
-import { matrix } from '../data/index';
+import { matrix } from 'gebetamap';
 import green from './green.png';
 const default_latitude = 9.02151;
 const default_longitude = 38.80115;
@@ -66,16 +66,12 @@ const GreenIcon = L.icon({
   })
 
   if (props.calculate) {
-    let startpoint = []
-    for (let i = 0; i < gmarker.length; i++){
-      let en = gmarker[i].lat +"/"+ gmarker[i].lng;
-      startpoint.push(en)
-    }
+    
   
  
     try {
       async function getData() {
-          const data = await matrix( startpoint , "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY")
+          const data = await matrix( gmarker , "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY")
           let array = []
           for (let i = 0; i < data.response.length; i++) {
                  array.push(data.response[i].data.direction)

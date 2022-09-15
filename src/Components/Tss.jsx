@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Polyline , useMapEvents , Marker , Popup , Pol
 import { useState } from 'react';
 import red from './red.png';
 import L from 'leaflet';
-import {tss} from '../data/index'
+import {tss} from 'gebetamap'
 const default_latitude = 9.02151;
 const default_longitude = 38.80115;
 
@@ -68,21 +68,18 @@ const GreenIcon = L.icon({
   })
 
   if (props.calculate) {
-    let startpoint = []
-    for (let i = 0; i < gmarker.length; i++){
-      let en = gmarker[i].lat +"/"+ gmarker[i].lng;
-      startpoint.push(en)
-    }
+ 
       
       try {
         async function getData() {
-          const ts = await tss(startpoint , "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY")
-      
+          console.log(gmarker)
+          const ts = await tss(gmarker , "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY")
+          console.log(ts)
           setPos(ts.direction);
          }
         getData()
       } catch (err) {
-          
+          console.log(err)
       }     
   }
 function getRandomColor() {

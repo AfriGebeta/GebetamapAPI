@@ -11,7 +11,13 @@ const direction =  async (start , newMarker , apiKey) => {
       }
 }
 
-const matrix = async (startpoint, apiKey) => {
+const matrix = async (gmarker, apiKey) => {
+
+  let startpoint = []
+    for (let i = 0; i < gmarker.length; i++){
+      let en = gmarker[i].lat +"/"+ gmarker[i].lng;
+      startpoint.push(en)
+    }
   
     const url = "https://mapapi.gebeta.app/api/v1/route/driving/matrix/?start=" + startpoint + "&apiKey="+apiKey
 
@@ -24,20 +30,16 @@ const matrix = async (startpoint, apiKey) => {
       }
 }
 
-const isodistance = async (point ,  apiKey) => {
-    //   const url = "https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=" + point.lat + "&lo1=" + start.lon + "&la2=" + newMarker.lat + "&lo2=" + newMarker.lng + "&apiKey="+apiKey
-    // try {
-    //     const response = await fetch(url);
-    //     const json = await response.json();
-    //     return json;
-    //   } catch (err) {
-    //     return err;
-    //   }      
-}
 
-const tss = async (points, apiKey) => {
 
-  const url = "https://mapapi.gebeta.app/api/v1/route/driving/tss/?start=" + points + "&apiKey=" + apiKey   
+const tss = async (gmarker, apiKey) => {
+  let startpoint = []
+    for (let i = 0; i < gmarker.length; i++){
+      let en = gmarker[i].lat +"/"+ gmarker[i].lng;
+      startpoint.push(en)
+    }
+
+  const url = "https://mapapi.gebeta.app/api/v1/route/driving/tss/?start=" + startpoint + "&apiKey=" + apiKey   
     try {
         const response = await fetch(url);
         const json = await response.json();
@@ -47,10 +49,33 @@ const tss = async (points, apiKey) => {
       }
 }
 
-const geocoding = (name , apiKey) => {
+const oneToMany = async (start, endpoints, apiKey) => {
+  let _endpoints = []
+  for (let i = 0; i < endpoints.length; i++){
+      let en = endpoints[i].lat +"/"+ endpoints[i].lng;
+      _endpoints.push(en)
+  }
+  const url = "https://mapapi.gebeta.app/api/v1/route/driving/onm/?la1=" + start.lat + "&lo1=" + start.lon + "&json=" + _endpoints + "&apiKey=" + apiKey
+  try {
+        const response = await fetch(url);
+        const json = await response.json();
+    return json
+  } catch (error) {
+    return error;
+  }
+}
+
+const geocoding = async (name, apiKey) => {
+  const url = "https://mapapi.gebeta.app/api/v1/route/geocoding?name=" + name + "&apiKey=" + apiKey;
+  try {
+      const response = await fetch(url);
+        const json = await response.json();
+  } catch (error) {
+    return error
+  }
 
 }
 
 
-module.exports = { direction: direction, matrix: matrix, isodistance: isodistance, tss: tss, geocoding: geocoding }
+module.exports = { direction: direction,  matrix: matrix,  oneToMany: oneToMany,  tss: tss,  geocoding: geocoding }
 
