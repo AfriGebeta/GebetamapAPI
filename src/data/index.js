@@ -19,7 +19,8 @@ const matrix = async (gmarker, apiKey) => {
       startpoint.push(en)
     }
   
-    const url = "https://mapapi.gebeta.app/api/v1/route/driving/matrix/?start=" + startpoint + "&apiKey="+apiKey
+  const url = "http://localhost:8080/api/v1/route/driving/matrix/?start=" + startpoint + "&apiKey=" + apiKey
+  console.log(url)
 
   try {
         const response = await fetch(url);
