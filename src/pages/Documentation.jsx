@@ -8,6 +8,7 @@ import Matrix from "../Components/Matrix";
 import OneToMany  from "../Components/OneToMany";
 import ISODistance from "../Components/IsoDistance";
 import Tss from "../Components/Tss";
+import Geocoding from "../Components/Geocoding";
 const openstreetmap = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 
 const Documentation = () => {
@@ -110,8 +111,10 @@ const Documentation = () => {
           </ol>
 
           
-          
-         
+          <p className="mt-[5%] font-bold text-3xl mb-[1%]">
+            Geocoding Endpoint
+          </p>
+         <Geocoding/>       
           <p className="mt-[5%] font-bold text-3xl mb-[1%]">
             Direction Endpoint
           </p>

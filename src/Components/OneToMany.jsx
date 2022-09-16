@@ -45,7 +45,7 @@ const GreenIcon = L.icon({
     try {
       console.log(gmarker)
       const data = await oneToMany(start,gmarker, "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY")
-      console.log(data)
+ 
       setPos(data.directions)
     } catch (err) {
       console.log(err)

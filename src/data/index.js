@@ -70,7 +70,8 @@ const geocoding = async (name, apiKey) => {
   const url = "https://mapapi.gebeta.app/api/v1/route/geocoding?name=" + name + "&apiKey=" + apiKey;
   try {
       const response = await fetch(url);
-        const json = await response.json();
+    const json = await response.json();
+    return json
   } catch (error) {
     return error
   }
