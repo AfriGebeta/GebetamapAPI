@@ -2,7 +2,7 @@ import React, { useEffect, useState , useRef} from "react";
 
 import RequestSample from "../Components/RequestSample";
 import ResponseSample from "../Components/ResponseSample";
-import { direction, responseSampleForDirection200, responseSampleForDirection400, responseSampleForDirection500 , tssreponse200 , matrixResponse200 } from "../data/responsecode";
+import { direction, responseSampleForDirection200, responseSampleForDirection400,responseSampleForOnm, responseSampleForDirection500 , tssreponse200 , matrixResponse200 } from "../data/responsecode";
 import Direction from "../Components/Direction";
 import Matrix from "../Components/Matrix";
 import OneToMany  from "../Components/OneToMany";
@@ -13,8 +13,10 @@ const openstreetmap = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 const Documentation = () => {
   //for the matrix
   const [matrixStart, setMatrixStart] = useState(false)
-  const [matrixCalculate , setMatrixCalculate] = useState(false)
-  
+  const [matrixCalculate, setMatrixCalculate] = useState(false)  
+  const [onmStart, setOnmStart] = useState(false)
+  const [onmStop, setOnmStop] = useState(false)
+  const [onmCalculate, setOnmCalculate] = useState(false)
 
   //for the routeOptimization
   const [routeOptimizationStart, setRouteOptimizationStart] = useState(false)
@@ -36,7 +38,20 @@ const Documentation = () => {
            }
   let handleMatrixCalculate = ()=> {
   setMatrixCalculate(!matrixCalculate)
-}
+  }
+  
+
+  let handleOnmStart = () => {
+    setOnmStart(!onmStart)
+  }
+
+  let handleOnmStop = () => {
+    setOnmStop(!onmStop)
+  }
+
+  let handleOnmCalculate = () => {
+    setOnmCalculate(!onmCalculate)
+  }
   return (
     <>
       <div class="flex w-full">
@@ -98,7 +113,7 @@ const Documentation = () => {
           
          
           <p className="mt-[5%] font-bold text-3xl mb-[1%]">
-            GET Route Endpoint
+            Direction Endpoint
           </p>
           <p className="mt-[1%]   mb-[5%]">Use this url on your map provider and start routing {openstreetmap}</p>
           <p>
@@ -130,7 +145,7 @@ const Documentation = () => {
           
           {/*Route Optimization problem*/}
           <p className="mt-[5%] font-bold text-3xl mb-[5%]">
-            Route Optimization API
+            Route Optimization EndPoint
           </p>
           <p>
             The GET request is the most simple one: just specify the parameter
@@ -169,7 +184,7 @@ const Documentation = () => {
              <Tss routeOptimizationStart={routeOptimizationStart} routeOptimizationCalculate = {routeOptimizationCalculate} />
         </div>
           <p className="mt-[5%] font-bold text-3xl mb-[5%]">
-            GET Route Endpoint
+            Matrix Endpoint
           </p>
           <p>
             The Matrix API is part of the GebetaMaps Directions API and with it, you can calculate many-to-many distances and times a lot more efficient than calling the Routing API multiple times.
@@ -204,7 +219,7 @@ The most simple example is a people trying to decide which bus restoursant is cl
             A simple illustration for a 3x3 matrix with identical from and to
             points:
           </p>
-          <table class="table-fixed border border-black">
+          <table class="mt-[2%] mb-[2%] table-fixed border border-black">
             <thead className="border border-black">
               <tr className="border border-black">
                 <th className="border border-black">-</th>
@@ -234,8 +249,8 @@ The most simple example is a people trying to decide which bus restoursant is cl
               </tr>
             </tbody>
           </table>
-          <h3>GET Matrix Endpoint</h3>
-          <p>With this Matrix Endpoint you submit the points and parameters via URL parameters and is the most convenient as it works out-of-the-box in the browser.</p>
+       
+      
           {/* code component */}
           <div className="w-full bg-[#263238] text-white mb-[5%] flex flex-col">
             <div className="bg-[#11171a] mx-[5%] mt-[2%] py-[1%]">
@@ -269,6 +284,80 @@ The most simple example is a people trying to decide which bus restoursant is cl
           }}>Calculate</button>
           <div className=' w-[90%] h-[500px] mb-[200px] ' >
              <Matrix matrixStart={matrixStart} matrixCalculate = {matrixCalculate} />
+          </div>
+
+            <p className="mt-[5%] font-bold text-3xl mb-[1%]">
+            One-to-Many Endpoint
+          </p>
+        
+          <p>
+            The One-To-Many EndPoint  is part of the GebetaMaps Directions API and with it, you can calculate one-to-many distances and times a lot more efficient than calling the Routing API multiple times.
+          </p>
+
+
+          <p>
+            A simple illustration for a 3x3 matrix with identical from and to
+            points:
+          </p>
+          <table class="table-fixed border border-black mt-[2%] mb-[2%]">
+            <thead className="border border-black">
+              <tr className="border border-black">
+                <th className="border border-black">-</th>
+                <th className="mx-[4%] border border-black">to_point1</th>
+                <th className="mx-[4%] border border-black">to_point2</th>
+                <th className="mx-[4%] border border-black">to_point3</th>
+              </tr>
+            </thead>
+            <tbody className="border border-black">
+              <tr className="border border-black">
+                <td className="border border-black ">from_pointa</td>
+                <td className="border border-black px-[2%]"> <span className="px-[2%]">a-{ ">"}1</span></td>
+                <td className="border border-black px-[2%]" >  <span className="px-[2%]">a-{">"}2</span></td>
+                 <td className="border border-black px-[2%]">  <span className="px-[2%]">a-{">"}3</span></td>
+              </tr>
+             
+             
+            </tbody>
+          </table>
+
+          {/* code component */}
+          <div className="w-full bg-[#263238] text-white mb-[5%] flex flex-col">
+            <div className="bg-[#11171a] mx-[5%] mt-[2%] py-[1%]">
+              <p className="mx-[2%] space-x-2 ">
+                <span className="bg-green-200 px-2 py-1">GET</span>
+                <span className="mx-[2%]">
+                  http://mapapi.gebeta.app/api/v1/route/driving/onm
+                  
+                </span>
+              </p>
+            </div>
+            {/* request sample here */}
+            <RequestSample
+              curl='curl  "https://mapapi.gebeta.app/api/v1/route/driving/onm/?la1=" + start.lat + &lo1= + start.lon + &endpoint= + _endpoints + &apiKey= apiKey"'
+              js={direction}
+            />
+            <ResponseSample responseCodes200={ responseSampleForOnm} responseCodes400={responseSampleForDirection400 } responseCodes500={responseSampleForDirection500 }      />
+          </div>
+
+           
+
+          <button style={{ background: onmStart ? "green" : "red" }}
+          onClick={() => {handleOnmStart()}}
+          >Start node</button>
+          <button className="ml-[1%]" style={{ background: onmStop ? "green" : "red" }}
+          onClick={() => {handleOnmStop()}}>Stop node</button>
+          <button className="ml-[1%]"  style={{ background: onmCalculate ? "green" : "red" }}
+            onClick={() => {
+              handleOnmCalculate()
+            
+            setTimeout(function(){
+                  setOnmStart(false)
+                setOnmCalculate(false)
+            }, 3000);
+            }}>Calculate</button>
+         
+          <div className=' w-[90%] h-[500px] bg-red-200 mb-[10%]' >
+             <OneToMany  start={onmStart} stop = {onmStop} calculate = {onmCalculate}/>
           </div>
           
 

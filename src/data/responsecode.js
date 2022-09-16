@@ -137,8 +137,35 @@ export const matrixResponse200 = [
 
 
 
+export const responseSampleForOnm = [
+                 <span>&#123;</span>,
+                <span className='px-[3%]'>"directions": [ </span>,
+                <span className='px-[3%]'>&#123;</span>,
+    <span className='pl-[6%]'>"msg": "Ok",</span>,
+    <span className='pl-[6%]'>"totalDistance": 3950.949,</span>,
+    <span className='pl-[6%]'>"direction": [</span>,
+    <span className='pl-[9%]'>[9.022412316021152,38.80394295340806]</span>,
+    <span className='pl-[9%]'>[9.022412316021152,38.80394295340806]</span>,
+                   <span className='pl-[6%]'>]</span>,
+    <span className='pl-[3%]'>&#125;,</span>,
+          <span className='px-[3%]'>&#123;</span>,
+    <span className='pl-[6%]'>"msg": "Ok",</span>,
+    <span className='pl-[6%]'>"totalDistance": 3950.949,</span>,
+    <span className='pl-[6%]'>"direction": [</span>,
+    <span className='pl-[9%]'>[9.022412316021152,38.80394295340806]</span>,
+    <span className='pl-[9%]'>[9.022412316021152,38.80394295340806]</span>,
+                   <span className='pl-[6%]'>]</span>,
+    <span className='pl-[3%]'>&#125;,</span>,
+    <span className='pl-[3%]'>]</span>,
+    <span className=''>&#125;,</span>,
+                
+
+              
+]
 
 
-
-
+            
+            
+            
+           
 

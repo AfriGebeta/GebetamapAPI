@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, Polyline , useMapEvents , Marker , Popup , Polygon , FeatureGroup , EditControl} from 'react-leaflet';
 import { useState } from 'react';
 import L from 'leaflet';
+import { oneToMany } from 'gebetamap';
 const default_latitude = 9.02151;
 const default_longitude = 38.80115;
 
@@ -40,11 +41,24 @@ const GreenIcon = L.icon({
   });
   
   
-  
+  async function callOnm(start , gmarker) {
+    try {
+      console.log(gmarker)
+      const data = await oneToMany(start,gmarker, "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkMTQyNmJjZTg3MzU4ZmEzYTc1NjRjMjY1YTA5MzZjYyIsImlhdCI6MTY2MjAxODUyMCwic3ViIjoidGFraXMiLCJpc3MiOiJ0YWtpIn0.xfH2ME-LYJ1enQpKMrPI4B-vnFZPGaEsg4rUEp95VqY")
+      console.log(data)
+      setPos(data.directions)
+    } catch (err) {
+      console.log(err)
+    } 
+       
+     
+  }
   const map = useMapEvents({
-    click(e) {
+    click(e)  {
       const newMarker = e.latlng
-      if (props.start && props.stop != true) { 
+      
+      if (props.start && props.stop != true) {
+      
           setL1(newMarker.lat);
           setLO1(newMarker.lng);  
           let _gmarker = [];
@@ -63,17 +77,7 @@ const GreenIcon = L.icon({
   })
 
   if (props.calculate) {
-    let endpoints = []
-    for (let i = 0; i < rmarker.length; i++){
-      let en = rmarker[i].lat +"/"+ rmarker[i].lng;
-      endpoints.push(en)
-    }
-    console.log(endpoints)
-    const url = "https://mapapi.gebeta.app/api/v1/route/driving/onm/?la1=" + l1 + "&lo1=" + lo1 + "&json=" +  endpoints
-        fetch(url)
-          .then(response =>  response.json() )
-          .then(data => {setPos(data.directions)});
-      
+    callOnm({lat : l1 , lon : lo1} ,  rmarker);
       
   }
 function getRandomColor() {
@@ -113,39 +117,21 @@ function getRandomColor() {
 }
 
 
-function OneToMany() {
+function OneToMany(props) {
 
-  const [start, setStart] = useState(false);
-  const [stop, setStop] = useState(false);
-  const [calculate, setCalculate] = useState(false);
 
-  
+
+
   return (
-
-    <div>
-      <button style={{ background : start ? "green" : "red"}} onClick={() => { setStart(!start); }}>Start node</button>
-      <button style={{ background : stop ? "green" : "red"}} onClick={() => { setStop(!stop); }}>Stop node</button>
-      <button style={{ background: calculate ? "green" : "red" }} onClick={() => {
-        setCalculate(true);
-        
-        const timer = setTimeout(() => {
-            setCalculate(false);
-        }, 2000);
-
-        
-      }}>Calculate</button>
-        <div className='leaflet-container'>
+        <div className='leaflet-container relative'>
             <MapContainer center={[default_latitude, default_longitude]} zoom={18}>
                 <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               />
-            <AddMarkerToClick key={0} start={start} stop={stop} calculate={calculate}/>
+            <AddMarkerToClick key={0} start={props.start} stop={props.stop} calculate={props.calculate}/>
             </MapContainer>
         </div>     
-      </div>
- 
-
   );
 }
 
